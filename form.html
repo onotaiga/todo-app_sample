@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TODO</title>
+</head>
+
+<body>
+  <h1>TODO 登録</h1>
+
+    <input type="button" value="削除" id="del">
+
+  <form onsubmit="push(event)" method="POST">
+    <input type="text" id="text" placeholder="TODO" autocomplete="off" maxlength="15" name="todo">
+    <input type="date" id="date" name="date">
+    <button type="submit">送信</button>
+  </form>
+  <ul id="list"></ul>
+
+
+  <script>
+    const list = document.getElementById('list')
+    const text = document.getElementById('text')
+    const date = document.getElementById('date')
+
+
+    // 入力内容を表示
+    function push(event) {
+      const itemList = Object.values(localStorage)
+      // event.preventDefault()
+      const li = document.createElement('li')
+      li.textContent = `${text.value} : ${date.value}`
+      list.appendChild(li)
+      console.log(date.value)
+
+      // 入力内容をlocalStrageに追加
+      localStorage.setItem(itemList.length, li.textContent)
+
+      // location.reload()
+    }
+
+
+    // リフレッシュ時にlocalSotrageを表示
+    function lord() {
+      const itemList = Object.values(localStorage)
+      for (let i = 0; i < itemList.length; i++) {
+        const li = document.createElement('li')
+        li.textContent = itemList[i]
+        list.appendChild(li)
+      }
+    }
+    lord()
+
+    const del = document.getElementById('del')
+
+    // TODOを削除(html)
+    del.addEventListener('click', () => {
+      while (list.firstChild) {
+        list.removeChild(list.firstChild)
+      }
+      // localStorageを削除
+      localStorage.clear()
+    })
+
+  </script>
+</body>
+
+</html>

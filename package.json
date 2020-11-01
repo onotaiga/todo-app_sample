@@ -1,0 +1,7 @@
+{
+  "name": "todo-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "onotaiga <taiga.8114@gmail.com>",
+  "license": "MIT"
+}
